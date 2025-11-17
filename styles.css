@@ -95,18 +95,74 @@ body{
 .tag{
   display:inline-block;
   padding:8px 12px;
-  background:rgba(255,255,255,0.9);
+  background:rgba(255,255,255,0.95);
   color:var(--text);
   border-radius:999px;
   font-weight:600;
   font-size:0.95rem;
   border:1px solid rgba(16,24,40,0.06);
+  position: relative; /* tooltip 用 */
+  cursor: default;
+  transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+  outline: none;
 }
 
-/* 小さいテキスト / メモ */
-.small{font-size:0.9rem}
-.muted{color:var(--muted)}
-.note{margin-top:10px;color:var(--muted)}
+/* タグのホバーで少し持ち上がる挙動（視覚的フィードバック） */
+.tag:hover,
+.tag:focus-visible {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(16,24,40,0.06);
+}
+
+/* ツールチップ（擬似要素） */
+.tag::after {
+  content: attr(data-desc);
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% + 10px);
+  transform: translateX(-50%) translateY(6px);
+  background: #ffffff;
+  color: var(--text);
+  padding: 8px 10px;
+  border-radius: 8px;
+  box-shadow: 0 8px 20px rgba(16,24,40,0.12);
+  white-space: normal;
+  width: max-content;
+  max-width: 260px;
+  font-size: 0.9rem;
+  line-height: 1.3;
+  text-align: left;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 220ms cubic-bezier(.2,.9,.2,1), transform 220ms cubic-bezier(.2,.9,.2,1);
+  z-index: 30;
+}
+
+/* 矢印（小さい三角） */
+.tag::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% + 4px);
+  transform: translateX(-50%);
+  border: 6px solid transparent;
+  border-top-color: #ffffff;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 220ms cubic-bezier(.2,.9,.2,1);
+  z-index: 29;
+}
+
+/* ホバー／フォーカスでツールチップ表示（段階的に見せるのではなく即座に表示だがアニメーションで優しく） */
+.tag:hover::after,
+.tag:focus-visible::after {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+.tag:hover::before,
+.tag:focus-visible::before {
+  opacity: 1;
+}
 
 /* フェードイン（IntersectionObserver 用） */
 .fade-in{
@@ -209,6 +265,7 @@ body{
   }
   .growable, .glowable { transition: none !important; transform: none !important; box-shadow: none !important; }
   .fade-in { transition: none !important; transform: none !important; opacity: 1 !important; }
+  .tag::after, .tag::before { display: none !important; } /* ツールチップも非表示 */
 }
 
 /* レスポンシブ */
@@ -218,6 +275,19 @@ body{
   .hero-title{font-size:1.6rem}
   .skills-banner{padding:28px}
   .skills-banner-title{font-size:1.6rem}
+
+  /* モバイルではツールチップをページ下に表示（より見やすく） */
+  .tag::after {
+    left: 50%;
+    bottom: auto;
+    top: calc(100% + 10px);
+    transform: translateX(-50%) translateY(-6px);
+  }
+  .tag::before {
+    bottom: auto;
+    top: calc(100% + 4px);
+    transform: translateX(-50%);
+  }
 }
 
 /* ヘルパー: 非表示テキスト（画面リーダ向け） */
