@@ -4,30 +4,27 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>自己紹介 — Taichi Hagiwara</title>
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="/my-portfolio/styles.css">
 </head>
 <body>
   <main class="container">
-    <header class="hero fade-in">
+    <header class="hero fade-in" tabindex="0">
       <h1 class="hero-title">プロフィール</h1>
     </header>
 
-    <section id="about" class="card fade-in">
+    <section id="about" class="card fade-in" tabindex="0">
       <h2>自己紹介</h2>
       <ul>
         <li>所属：大阪公立大学工業高等専門学校2年</li>
         <li>知能情報コース</li>
-        <li>16歳</li>
       </ul>
     </section>
 
-    <!-- 薄い青のバナー（大きく「スキル」と表示） -->
-    <section class="skills-banner fade-in" aria-hidden="false">
+    <section class="skills-banner fade-in" aria-hidden="false" tabindex="0">
       <h2 class="skills-banner-title">スキル</h2>
     </section>
 
-    <!-- スキル本体（薄い緑がかった指定色 C0E5D6） -->
-    <section id="skills" class="card skills-card fade-in">
+    <section id="skills" class="card skills-card fade-in" tabindex="0">
       <h2 class="visually-hidden">プログラムスキル</h2>
       <div class="skills-inner">
         <h3 class="skills-subtitle">プログラムスキル</h3>
@@ -38,11 +35,11 @@
           <span class="tag">CSS</span>
           <span class="tag">HTML</span>
         </div>
-        
+        <p class="note">各言語の経験年数やプロジェクト例を追記すると見栄えが良くなります。</p>
       </div>
     </section>
 
-    <section id="tools" class="card fade-in">
+    <section id="tools" class="card fade-in" tabindex="0">
       <h2>ツール</h2>
       <div class="tags">
         <span class="tag">VSCode</span>
@@ -52,8 +49,11 @@
       </div>
     </section>
 
+    <footer class="fade-in" tabindex="0">
+      <p class="small muted">This page is a template — 編集してお使いください。</p>
+    </footer>
   </main>
 
-  <script src="script.js"></script>
+  <script src="/my-portfolio/script.js"></script>
 </body>
 </html>
