@@ -38,7 +38,7 @@ body{
   margin-bottom:48px; /* 広めの余白 */
 }
 .hero-title{
-  margin:0;
+  margin:0;s
   font-size:2.0rem;
   letter-spacing:-0.02em;
   color:var(--accent); /* 指定の青色 */
